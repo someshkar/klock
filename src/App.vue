@@ -1,28 +1,59 @@
-<template>
+<template v-if="tick">
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Clock :minute="time.minutes" :tick="tick" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Clock from "./components/Clock.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
+    Clock
+  },
+  data() {
+    return {
+      tick: 0,
+      time: { hours: 0, minutes: 0, seconds: 0 }
+    };
+  },
+  methods: {
+    updateTime(time) {
+      this.tick++;
+      this.time = {
+        hours: time.getHours(),
+        minutes: time.getMinutes(),
+        seconds: time.getSeconds()
+      };
+
+      setTimeout(
+        () => this.updateTime(new Date()),
+        1000 - new Date().getMilliseconds()
+      );
+    }
+  },
+  mounted() {
+    this.updateTime(new Date());
   }
-}
+};
 </script>
 
-<style>
+<style lang="scss">
+@import "normalize-scss";
+@include normalize();
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  height: 100vh;
+  max-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #29263e;
 }
 </style>
