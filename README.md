@@ -1,6 +1,6 @@
-# Klock
+# Klock - A Vue.js based wall clock
 
-### An analog clock built using Vue.js for keeping track of time during my board sample papers. Mainly exists because I don't have a clock in my room.
+An analog clock built using Vue.js for keeping track of time during my board sample papers. Mainly exists because I don't have a clock in my room.
 
 ## Project setup
 
